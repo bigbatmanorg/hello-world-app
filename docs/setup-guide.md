@@ -48,7 +48,7 @@ uv run pytest
 uv run hello-world-app
 uv run hello-world-app Ada
 uv build
-uv run pyinstaller --onefile src/hello_world_app/cli.py -n hello-world-app
+uv run pyinstaller --onefile src/hello_world_app/__main__.py -n hello-world-app
 uv run mkdocs build --strict    # mkdocs serve is available for local preview
 
 git config user.name "bigbatmanorg"

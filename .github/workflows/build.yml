@@ -35,7 +35,7 @@ jobs:
         run: uv build
 
       - name: Build PyInstaller executable
-        run: uv run pyinstaller --onefile src/hello_world_app/cli.py -n hello-world-app
+        run: uv run pyinstaller --onefile src/hello_world_app/__main__.py -n hello-world-app
 
       - name: Upload wheel artifact
         if: runner.os == 'Linux'

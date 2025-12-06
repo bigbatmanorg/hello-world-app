@@ -5,7 +5,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from . import greet
+from hello_world_app import greet
 
 
 def main() -> None:

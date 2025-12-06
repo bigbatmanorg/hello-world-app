@@ -29,7 +29,7 @@ uv run hello-world-app Ada
 
 ```bash
 uv build                                              # build sdist + wheel
-uv run pyinstaller --onefile src/hello_world_app/cli.py -n hello-world-app
+uv run pyinstaller --onefile src/hello_world_app/__main__.py -n hello-world-app
 uv run mkdocs serve                                   # live docs server
 uv run mkdocs build                                   # static site
 ```
