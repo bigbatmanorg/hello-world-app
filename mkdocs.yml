@@ -1,6 +1,6 @@
 site_name: Hello World App
-site_url: https://your-github-user.github.io/hello-world-app
-repo_url: https://github.com/your-github-user/hello-world-app
+site_url: https://bigbatmanorg.github.io/hello-world-app
+repo_url: https://github.com/bigbatmanorg/hello-world-app
 theme:
   name: material
   palette:
