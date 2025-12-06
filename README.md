@@ -1,5 +1,7 @@
 # Hello World App
 
+Docs: https://bigbatmanorg.github.io/hello-world-app
+
 Simple cross-platform Hello World CLI. GitHub Actions builds a Python wheel plus PyInstaller executables for Linux and Windows and publishes MkDocs documentation to GitHub Pages.
 
 ## Quick start (with uv)
@@ -24,6 +26,11 @@ uv run hello-world-app Ada
 - Linux job also produces the Python wheel (`dist/`) for package distribution.
 - Linux and Windows jobs build PyInstaller one-file executables and upload them as workflow artifacts.
 - Documentation is built with MkDocs and published to GitHub Pages on every push to `main`.
+
+## GitHub Pages deploy requirements
+- In the repository, open **Settings → Pages → Build and deployment** and pick **GitHub Actions** so the Pages site exists before the workflow runs.
+- In **Settings → Actions → General → Workflow permissions**, give `GITHUB_TOKEN` **Read and write** access (and allow Pages deployments if the org setting appears); otherwise `actions/configure-pages@v5` will fail with "Resource not accessible by integration".
+- After those two toggles, rerun the `Docs` workflow; the existing `.github/workflows/docs.yml` will build with MkDocs and deploy successfully.
 
 ## Local builds
 

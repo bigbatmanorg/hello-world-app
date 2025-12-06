@@ -27,8 +27,13 @@ Use this checklist to recreate the same repo pattern elsewhere.
    - Create a GitHub repo (via UI or `gh repo create <owner>/<name> --public`).
    - `git remote add origin git@github.com:<owner>/<name>.git` (or HTTPS) and `git push -u origin main`.
 6. **Enable Pages**
-   - In GitHub repo settings > Pages, pick source "GitHub Actions".
-   - First push will let the `docs.yml` workflow publish to `gh-pages` and attach the Pages site to the `github-pages` environment automatically.
+   - In GitHub repo settings > Pages, pick source "GitHub Actions" so the site exists before the workflow calls the Pages API.
+   - In repo settings > Actions > General, set `GITHUB_TOKEN` permissions to **Read and write** (and allow Pages deployments if your org has that toggle). Without this, `actions/configure-pages@v5` returns "Resource not accessible by integration".
+   - After toggling those settings, rerun the Docs workflow; the included `.github/workflows/docs.yml` will build with MkDocs and deploy to Pages.
+
+## Pages troubleshooting
+- Error `Resource not accessible by integration` during `actions/configure-pages@v5`: ensure Pages is set to "GitHub Actions" and `GITHUB_TOKEN` has write access as described above.
+- If Pages creation is restricted at the org level, an owner must allow this repository or enable Pages globally. Private repos need a plan that includes Pages.
 
 ## How the automation works
 - **build.yml** runs on each push. It installs dev deps, runs tests, builds a wheel on Linux, and produces PyInstaller one-file executables on Linux and Windows. Artifacts are uploaded to the workflow run.
