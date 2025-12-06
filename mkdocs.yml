@@ -1,0 +1,13 @@
+site_name: Hello World App
+site_url: https://your-github-user.github.io/hello-world-app
+repo_url: https://github.com/your-github-user/hello-world-app
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: cyan
+nav:
+  - Home: index.md
+  - Usage: usage.md
+  - Setup Guide: setup-guide.md

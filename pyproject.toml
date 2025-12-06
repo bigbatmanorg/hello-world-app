@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=65", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hello-world-app"
+version = "0.1.0"
+description = "Simple cross-platform Hello World CLI packaged with GitHub Actions."
+readme = "README.md"
+authors = [{name = "Your Name"}]
+license = "MIT"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+hello-world-app = "hello_world_app.cli:main"
+
+[project.optional-dependencies]
+dev = [
+    "build>=1.2",
+    "pyinstaller>=6.4",
+    "pytest>=8.2",
+    "mkdocs>=1.5",
+    "mkdocs-material>=9.5",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]

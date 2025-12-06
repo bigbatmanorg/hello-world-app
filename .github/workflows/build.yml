@@ -1,0 +1,50 @@
+name: Build and Test
+
+on:
+  push:
+    branches: ["main", "master"]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up uv with Python
+        uses: astral-sh/setup-uv@v3
+        with:
+          python-version: "3.11"
+          enable-cache: true
+
+      - name: Install dependencies (uv sync)
+        run: uv sync --all-extras --dev
+
+      - name: Run tests
+        run: uv run pytest
+
+      - name: Build wheel (Linux only)
+        if: runner.os == 'Linux'
+        run: uv build
+
+      - name: Build PyInstaller executable
+        run: uv run pyinstaller --onefile src/hello_world_app/cli.py -n hello-world-app
+
+      - name: Upload wheel artifact
+        if: runner.os == 'Linux'
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-wheel
+          path: dist/*.whl
+
+      - name: Upload PyInstaller executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ runner.os }}-executable
+          path: |
+            dist/hello-world-app
+            dist/hello-world-app.exe
+          if-no-files-found: error
