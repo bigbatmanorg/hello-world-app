@@ -40,3 +40,4 @@ uv run mkdocs build                                   # static site
 
 ## Repo bootstrap summary
 A detailed walkthrough for recreating this pattern in new repositories is in `docs/setup-guide.md`.
+to be added later 
