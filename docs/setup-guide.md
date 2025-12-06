@@ -35,3 +35,24 @@ Use this checklist to recreate the same repo pattern elsewhere.
 - **docs.yml** builds the MkDocs site, uploads it as a Pages artifact, and deploys to GitHub Pages with `actions/deploy-pages`.
 
 Following this guide gives you a reproducible, multi-platform distribution pipeline for small Python CLIs.
+
+## Deployment command sequence (example)
+Run these from the repo root to build, test, and push:
+
+```bash
+cd /home/adam/projects/githubTESTrepo
+uv venv
+uv sync --all-extras --dev
+
+uv run pytest
+uv run hello-world-app
+uv run hello-world-app Ada
+uv build
+uv run pyinstaller --onefile src/hello_world_app/cli.py -n hello-world-app
+uv run mkdocs build --strict    # mkdocs serve is available for local preview
+
+git config user.name "bigbatmanorg"
+git config user.email "moravcik.adam@gmail.com"
+git remote set-url origin https://github.com/bigbatmanorg/hello-world-app.git
+git push -u origin main
+```
